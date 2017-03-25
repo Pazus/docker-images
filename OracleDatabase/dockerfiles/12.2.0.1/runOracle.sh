@@ -154,7 +154,7 @@ else
    rm -f $ORACLE_HOME/network/admin/tnsnames.ora
    
    # Create database
-   $ORACLE_BASE/$CREATE_DB_FILE $ORACLE_SID $ORACLE_PDB;
+   $ORACLE_BASE/$CREATE_DB_FILE $ORACLE_SID;
    
    # Move database operational files to oradata
    moveFiles;

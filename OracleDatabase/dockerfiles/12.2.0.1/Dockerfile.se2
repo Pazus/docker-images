@@ -42,7 +42,9 @@ ENV ORACLE_BASE=/opt/oracle \
     CLEANUP_FILE="cleanup.sh" \
     CHECK_SPACE_FILE="checkSpace.sh" \
     INSTALL_DB_BINARIES_FILE="installDBBinaries.sh" \
-	ORACLE_PWD="oracle"
+    ORACLE_PWD="oracle" \
+    PDB_BASE_DIR="$ORACLE_BASE/oradata/pdbs" \
+    ORACLE_PDB="ORCLPDB1"
 
 # Use second ENV so that variable get substituted
 ENV INSTALL_DIR=$ORACLE_BASE/install \
@@ -73,7 +75,7 @@ USER oracle
 RUN $ORACLE_BASE/$CLEANUP_FILE
 WORKDIR /home/oracle
 
-#VOLUME ["$ORACLE_BASE/oradata"]
+VOLUME ["$PDB_BASE_DIR"]
 EXPOSE 1521 5500
     
 # Define default command to start Oracle Database. 
