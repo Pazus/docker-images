@@ -43,7 +43,7 @@ ENV ORACLE_BASE=/opt/oracle \
     CHECK_SPACE_FILE="checkSpace.sh" \
     INSTALL_DB_BINARIES_FILE="installDBBinaries.sh" \
     ORACLE_PWD="oracle" \
-    PDB_BASE_DIR="$ORACLE_BASE/oradata/pdbs" \
+    PDB_BASE_DIR="$ORACLE_BASE/oradata" \
     ORACLE_PDB="ORCLPDB1"
 
 # Use second ENV so that variable get substituted
