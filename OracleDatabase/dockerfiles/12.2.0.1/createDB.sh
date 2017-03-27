@@ -114,4 +114,4 @@ EOF
 rm $ORACLE_BASE/dbca.rsp
 
 # Make dir for PDBs
-mkdir -p $PDB_BASE_DIR
+#mkdir -p $PDB_BASE_DIR

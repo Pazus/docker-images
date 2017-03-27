@@ -71,12 +71,18 @@ RUN $INSTALL_DIR/$INSTALL_DB_BINARIES_FILE SE2
 USER root
 RUN $ORACLE_BASE/oraInventory/orainstRoot.sh && \
     $ORACLE_HOME/root.sh && \
-    rm -rf $INSTALL_DIR
+    rm -rf $INSTALL_DIR && \
 
 USER oracle
 RUN $ORACLE_BASE/$CREATE_DB_FILE && \
     $ORACLE_BASE/$STOP_FILE && \
     $ORACLE_BASE/$CLEANUP_FILE
+	
+USER root
+RUN mkdir -p $PDB_BASE_DIR && \
+    chown -R oracle:dba $PDB_BASE_DIR 
+	
+USER oracle	
 WORKDIR /home/oracle
 
 VOLUME ["$PDB_BASE_DIR"]
