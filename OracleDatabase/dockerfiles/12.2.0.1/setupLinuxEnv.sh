@@ -14,6 +14,7 @@
 # Adjust file permissions, go to /opt/oracle as user 'oracle' to proceed with Oracle installation
 # ------------------------------------------------------------
 mkdir -p $ORACLE_BASE/oradata && \
+mkdir -p $PDB_BASE_DIR && \
 chmod ug+x $ORACLE_BASE/$PWD_FILE && \
 chmod ug+x $ORACLE_BASE/$RUN_FILE && \
 chmod ug+x $ORACLE_BASE/$START_FILE && \
@@ -24,4 +25,5 @@ useradd  -u 500 -d /home/oracle -g dba -G dba,oinstall -m -s /bin/bash oracle &&
 echo oracle:oracle | chpasswd && \
 yum -y install oracle-database-server-12cR2-preinstall unzip wget tar openssl && \
 yum clean all && \
-chown -R oracle:dba $ORACLE_BASE
+chown -R oracle:dba $ORACLE_BASE && \
+chown -R oracle:dba $PDB_BASE_DIR

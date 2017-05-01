@@ -135,6 +135,9 @@ if [ "$ORACLE_CHARACTERSET" == "" ]; then
    export ORACLE_CHARACTERSET=AL32UTF8
 fi;
 
+ # Start database
+$ORACLE_BASE/$START_FILE;
+
 # Check whether database already exists
 if [ -d $PDB_BASE_DIR/$ORACLE_PDB ]; then
    symLinkFiles;
@@ -144,8 +147,7 @@ if [ -d $PDB_BASE_DIR/$ORACLE_PDB ]; then
       mkdir -p $ORACLE_BASE/admin/$ORACLE_SID/adump
    fi;
    
-   # Start database
-   $ORACLE_BASE/$START_FILE;
+  
    
 else
    

@@ -30,6 +30,7 @@ MAINTAINER Gerald Venzl <gerald.venzl@oracle.com>
 # -------------------------------------------------------------
 ENV ORACLE_BASE=/opt/oracle \
     ORACLE_HOME=/opt/oracle/product/12.2.0.1/dbhome_1 \
+	PDB_BASE_DIR=/opt/oracle/oradata/pdbs \
     INSTALL_FILE_1="linuxx64_12201_database.zip" \
     INSTALL_RSP="db_inst.rsp" \
     CONFIG_RSP="dbca.rsp.tmpl" \
@@ -45,7 +46,6 @@ ENV ORACLE_BASE=/opt/oracle \
     CHECK_SPACE_FILE="checkSpace.sh" \
     INSTALL_DB_BINARIES_FILE="installDBBinaries.sh" \
     ORACLE_PWD="oracle" \
-    PDB_BASE_DIR="$ORACLE_BASE/oradata/pdbs" \
     ORACLE_PDB="ORCLPDB1"
 
 # Use second ENV so that variable get substituted
@@ -71,18 +71,13 @@ RUN $INSTALL_DIR/$INSTALL_DB_BINARIES_FILE SE2
 USER root
 RUN $ORACLE_BASE/oraInventory/orainstRoot.sh && \
     $ORACLE_HOME/root.sh && \
-    rm -rf $INSTALL_DIR && \
+    rm -rf $INSTALL_DIR
 
 USER oracle
 RUN $ORACLE_BASE/$CREATE_DB_FILE && \
     $ORACLE_BASE/$STOP_FILE && \
     $ORACLE_BASE/$CLEANUP_FILE
-	
-USER root
-RUN mkdir -p $PDB_BASE_DIR && \
-    chown -R oracle:dba $PDB_BASE_DIR 
-	
-USER oracle	
+
 WORKDIR /home/oracle
 
 VOLUME ["$PDB_BASE_DIR"]
